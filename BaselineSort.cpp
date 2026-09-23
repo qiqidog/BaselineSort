@@ -15,9 +15,9 @@ void moveLeft(int a[], int n){
 int main()
 {
     int arr[100];
-    int base[100]; // ±£´æÃ¿Ò»ÂÖ¼õÈ¥µÄ×îĞ¡Öµ
+    int base[100]; // ä¿å­˜æ¯ä¸€è½®å‡å»çš„æœ€å°å€¼
     int n;
-    cout << "ÊäÈëÊı×Ö¸öÊı£º";
+    cout << "è¾“å…¥æ•°å­—ä¸ªæ•°ï¼š";
     cin >> n;
     for(int i = 0; i < n; i++)
         cin >> arr[i];
@@ -26,10 +26,10 @@ int main()
     for(int i = 0; i < n; i++)
         data[i] = arr[i];
 
-    // Ò»¹²nÂÖ
+    // ä¸€å…±nè½®
     for(int round = 0; round < n; round++)
     {
-        // ÕÒµ±Ç°·Ç0×îĞ¡Öµ
+        // æ‰¾å½“å‰é0æœ€å°å€¼
         int minv = 9999;
         for(int i = 0; i < n; i++)
         {
@@ -38,9 +38,9 @@ int main()
                 minv = data[i];
             }
         }
-        base[round] = minv; // ´æ±¾ÂÖ¼õµôµÄÖµ
+        base[round] = minv; // å­˜æœ¬è½®å‡æ‰çš„å€¼
 
-        // ËùÓĞ·Ç0Êı×Ö¼õÈ¥minv
+        // æ‰€æœ‰é0æ•°å­—å‡å»minv
         for(int i = 0; i < n; i++)
         {
             if(data[i] != 0)
@@ -49,20 +49,20 @@ int main()
         moveLeft(data, n);
     }
 
-    // ========= ÀÛ¼Óbase£¬»¹Ô­Ô­Ê¼ÊıÖµ =========
+    // ========= ç´¯åŠ baseï¼Œè¿˜åŸåŸå§‹æ•°å€¼ =========
     int res[100] = {0};
-    for(int i = 0; i < n; i++)
+    for(int i = n;i >=0;i--)
     {
         int sum_base = 0;
-        // base´ÓµÚiÏî¼Óµ½×îºó
-        for(int k = i; k < n; k++)
+        // baseä»ç¬¬ié¡¹åŠ åˆ°æœ€å
+        for(int k = 0; k < i+1; k++)
         {
             sum_base += base[k];
         }
         res[i] = sum_base;
     }
 
-    cout << "½µĞò½á¹û£º";
+    cout << "å‡åºç»“æœï¼š";
     for(int i = 0; i < n; i++)
         cout << res[i] << " ";
     return 0;
