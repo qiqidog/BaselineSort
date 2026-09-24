@@ -15,7 +15,6 @@ void moveLeft(int a[], int n){
 int main()
 {
     int arr[100];
-    int base[100]; // 保存每一轮减去的最小值
     int n;
     cout << "输入数字个数：";
     cin >> n;
@@ -26,11 +25,13 @@ int main()
     for(int i = 0; i < n; i++)
         data[i] = arr[i];
 
-    // 一共n轮
+    int res[100] = {0};
+    int resCnt = 0;
+    int totalBase = 0; // 累计减去的总和！！
+
     for(int round = 0; round < n; round++)
     {
-        // 找当前非0最小值
-        int minv = 9999;
+        int minv = 1000000000;
         for(int i = 0; i < n; i++)
         {
             if(data[i] != 0 && data[i] < minv)
@@ -38,32 +39,24 @@ int main()
                 minv = data[i];
             }
         }
-        base[round] = minv; // 存本轮减掉的值
+        if(minv == 1000000000)
+            break;
 
-        // 所有非0数字减去minv
+        totalBase += minv; // 叠加基线
+        res[resCnt] = totalBase; // 累加后的才是原始数值！
+
         for(int i = 0; i < n; i++)
         {
             if(data[i] != 0)
                 data[i] -= minv;
         }
         moveLeft(data, n);
-    }
 
-    // ========= 累加base，还原原始数值 =========
-    int res[100] = {0};
-    for(int i = n;i >=0;i--)
-    {
-        int sum_base = 0;
-        // base从第i项加到最后
-        for(int k = 0; k < i+1; k++)
-        {
-            sum_base += base[k];
-        }
-        res[i] = sum_base;
+        resCnt++;
     }
 
     cout << "升序结果：";
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < resCnt; i++)
         cout << res[i] << " ";
     return 0;
 }
